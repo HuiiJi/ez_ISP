@@ -107,7 +107,7 @@ ez_ISP项目由`run.py`文件运行。
 ```python
 python run.py
 ```
-![show](assets/running.jpg)
+![show](assets/running.png)
 
 在你运行`run.py`文件之前，请先配置`config/isp_config.yaml`文件，配置文件如下所示。
 
