@@ -106,7 +106,9 @@ The ez_ISP project is run by the `run.py` file.
 python run.py
 ```
 ![show](assets/running.png)
+
 But before you run the py, please config the `config/isp_config.yaml` file, The config file is listed as follows.
+
 ```yaml
 # -------------------- ISP Module Enable/Disable --------------------
 enable:                
