@@ -2,7 +2,11 @@
 
 ![pipe](assets/ez_ISP.png)
 
-if you want to read the Chinese version, please click [简体中文](README_ch.md).
+##  Version
+
+- [简体中文](README_ch.md)
+
+
 ## Introduction
 
 This is a easy ISP (aka:ez_ISP) for RAW to RGB conversion. It is based on the package of `numpy`, and it is easy to use and understand. The ez_ISP project is implemented by python, and it is easy to transplant to other platforms such as C/C++ for speed up. 

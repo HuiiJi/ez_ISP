@@ -5,7 +5,7 @@ enable:
   BLC: True
   AAF: True
   AWB: True
-  BNR: False                 # not implemented yet
+  BNR: False               # not implemented yet
   CFA: True
   CCM: True
   GTM: True

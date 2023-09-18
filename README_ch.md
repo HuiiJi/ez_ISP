@@ -4,7 +4,7 @@
 
 ## 介绍
 
-这是一个简单的ISP（即：ez_ISP），用于将RAW转换为RGB。它基于`numpy`包，易于使用和理解。ez_ISP项目由python实现，易于移植到其他平台，例如C / C ++以加快速度。
+这是一个简单的ISP（即：ez_ISP），用于将RAW转换为RGB。它基于`numpy`包，易于使用和理解。ez_ISP项目由python实现，可通过改写为C / C ++以加快速度。
 
 - [x] Bad Pixel Correction， 坏点校正
 - [x] Black Level Correction， 黑电平校正
@@ -204,22 +204,22 @@ The params are listed as follows.
 
 如果你不想使用某个模块，你可以将其`enable`设置为`False`。你必须配置的是`RAW_img_path`，`RAW_Height`，`RAW_Width`，其他的参数你可以根据你的需要来配置。结果将会保存在`demo_outputs`文件夹中。
 
-## Course
+## 课程
 这里是一些关于ISP的课程，你可以从这些课程中了解更多关于ISP的知识。
 
-### camera related
+### 相机相关
 - [ISP Pipe1， 了解](https://web.stanford.edu/class/cs231m/lectures/lecture-11-camera-isp.pdf)
 - [ISP Pipe2， 了解](http://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/lectures/16_camerapipeline1.pdf)
 - [ISP Pipe3， 了解](http://graphics.cs.cmu.edu/courses/15-463/2017_fall/lectures/lecture2.pdf)
 
 你可以从这些课程中了解更多关于ISP的知识，但是我认为这些课程对我来说并不是很有用，因为我不是一个相机工程师，我只是想学习ISP算法，所以我认为下面的课程对我来说更有用。
-### Computational photography
+### 计算摄影
 - [Camera History， 了解](http://www.cs.cornell.edu/courses/cs6640/2012fa/slides/01-History.pdf)
 - [Recommend for ISP，推荐](https://www.eecs.yorku.ca/~mbrown/ICCV19_Tutorial_MSBrown.pdf)
 - [Digital Photomontage，了解](https://graphics.stanford.edu/talks/compphot-publictalk-may08.pdf)
 - [Marc大佬开课，强烈推荐](https://sites.google.com/site/marclevoylectures/schedule)
 
-## Rerfence
+## 参考
 这里是一些开源的ISP项目，这些项目对我完成这个项目非常有帮助。
 ### Python
 

@@ -85,7 +85,7 @@ class BNR:
             'bilateral': self.__bilateral,
             'gaussian': self.__gaussian_img2col
         }
-        return _dict_.pop(self.bnr_method)(**self.kwargs)
+        return _dict_.pop(self.bnr_method)()
         
     
     @time_cost_decorator
