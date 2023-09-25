@@ -39,7 +39,7 @@ class CFA:
         """
         check the inputs
         """
-        assert self.bayer_pattern in ['RGGB', 'BGGR'], "bayer_pattern should be in ['RGGB', 'BGGR'], but got {}".format(self.bayer_pattern)
+        assert self.bayer_pattern in ['RGGB', 'BGGR', 'GRBG', 'GBRG'], 'bayer_pattern should be RGGB, BGGR, GRBG, GBRG, please check it, now is {}'.format(self.bayer_pattern)
         assert self.cfa_method in ['malvar', 'bilinear'], "type should be in ['malvar', 'bilinear'], but got {}".format(self.cfa_method)
         assert self.inputs is not None, "inputs is None, please check it"
         assert self.inputs.ndim == 2 and len(self.inputs.shape) == 2, "inputs shape is {}, should be 2 dims cause color filter array".format(self.inputs.shape)

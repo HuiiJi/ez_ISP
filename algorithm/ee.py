@@ -40,6 +40,7 @@ class EE:
         """
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3, 'inputs shape should be 3, please check it, now is {}'.format(len(self.inputs.shape))
+        assert 0 < self.edge_enhancement_strength < 1, 'edge_enhancement_strength should be greater than 0 and less than 1, please check it, now is {}'.format(self.edge_enhancement_strength)
     
     
     def padding_inputs(self, inputs:np.ndarray, padding:int)->np.ndarray:

@@ -40,7 +40,8 @@ class AAF:
         """
         assert self.inputs is not None, "inputs is None, please check it"
         assert self.inputs.ndim == 2 and len(self.inputs.shape) == 2, f'inputs shape is {self.inputs.shape}, should be 2 dims cause color filter array'
-
+        assert self.white_level is not None, 'white_level is None, please check it'
+        assert 0 < self.white_level < 65535, f'white_level should be greater than 0 and less than 65535, please check it, now is {self.white_level}'
         
     def __padding_inputs(self, inputs:np.ndarray, padding:int)->np.ndarray:
         """

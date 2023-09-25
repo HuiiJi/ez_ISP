@@ -4,17 +4,17 @@
 # @Date    : 2023/9/11
 # @Description: run demo
 
-
+import sys
 from isp_pipeline import ISP_Pipeline
 from path import Path
 import os
 import time
-import sys
 
 sys.path.insert(0, os.path.dirname(__file__) + '/algorithm')
 sys.path.insert(0, os.path.dirname(__file__) + '/config')
 sys.path.insert(0, os.path.dirname(__file__) + '/assets')
 sys.path.insert(0, os.path.dirname(__file__))
+
 
 
 def run_demo():
@@ -33,9 +33,7 @@ def run_demo():
         run_demo()
     """
     root_path = Path(os.path.abspath(__file__)).parent
-
     yaml_path = root_path / 'config' / 'isp_config.yaml'
-    print('yaml_path:', yaml_path)
     ISP_Pipeline(config_path=yaml_path).run()
     
 
@@ -94,10 +92,5 @@ def get_module_output():
     
     
 if __name__ == "__main__":
-    start_time = time.time()
     run_demo()
     # get_module_output()
-    end_time = time.time()
-    cost_time = (end_time - start_time)
-    print('ez_ISP demo run over', f'cost time is {cost_time:.2f} s')
-    

@@ -45,6 +45,8 @@ class CNR:
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3 and self.inputs.shape[2] == 3, f'inputs shape should be 3, please check it, now is {len(self.inputs.shape)}'
         assert self.cnr_method in ['mean', 'median', 'gaussian'], f'Invalid CNR method, please check it, now is {self.cnr_method}'
+        assert 0 < self.cnr_threshold < 1, f'CNR_threshold should be greater than 0 and less than 1, please check it, now is {self.cnr_threshold}'
+        assert 0 < self.white_level < 65535, f'white_level should be greater than 0 and less than 65535, please check it, now is {self.white_level}'
         
         
     def __padding_inputs(self, inputs:np.ndarray, padding:int)->np.ndarray:

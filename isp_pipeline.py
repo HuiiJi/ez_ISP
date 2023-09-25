@@ -91,8 +91,9 @@ class ISP_Pipeline:
         save ISP Pipeline outputs
         """
         import cv2
-        image_id = self.cfg['RAW_img_path'].split('/')[-1].split('.')[0]
+        image_id = self.cfg['RAW_img_path'].split('\\')[-1].split('.')[0]
         cv2.imwrite(self.root_path / 'demo_outputs' / f'{image_id}.png', output[..., ::-1])
+        print('ISP Pipeline outputs saved successfully and the path is: ', self.root_path / 'demo_outputs' / f'{image_id}.png')
     
 
 

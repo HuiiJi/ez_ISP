@@ -42,7 +42,8 @@ class BNR:
         assert self.inputs is not None, f'inputs must be a np.ndarray, please check your input inputs: {self.inputs}'
         assert len(self.inputs.shape) == 2, f'inputs shape should be 2, please check it, now is {len(self.inputs.shape)}'
         assert self.bnr_method in ['nlm', 'mean', 'median', 'bilateral', 'gaussian'], f'bnr_method should be nlm, mean, median, bilateral or gaussian, please check it, now is {self.bnr_method}'
-        
+        assert 0 < self.white_level < 65535, f'white_level should be greater than 0 and less than 65535, please check it, now is {self.white_level}'
+    
     
     def __padding_inputs(self, inputs:np.ndarray, padding:int)->np.ndarray:
         """

@@ -42,6 +42,9 @@ class BPC:
         """
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 2, 'inputs shape should be 2, please check it, now is {}'.format(len(self.inputs.shape))
+        assert self.bayer_pattern in ['RGGB', 'BGGR', 'GRBG', 'GBRG'], 'bayer_pattern should be RGGB, BGGR, GRBG, GBRG, please check it, now is {}'.format(self.bayer_pattern)
+        assert 0 < self.white_level < 65535, 'white_level should be greater than 0 and less than 65535, please check it, now is {}'.format(self.white_level)
+        assert 0 < self.bad_pixel_threshold < 255, 'bad_pixel_threshold should be greater than 0 and less than 255, please check it, now is {}'.format(self.bad_pixel_threshold)
 
 
     def __padding_inputs(self, inputs:np.ndarray, padding:int)->np.ndarray:

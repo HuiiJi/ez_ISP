@@ -43,6 +43,7 @@ class BLC:
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 2, 'inputs shape should be 2, please check it, now is {}'.format(len(self.inputs.shape))
         assert self.bayer_pattern in ['RGGB', 'BGGR', 'GRBG', 'GBRG'], 'bayer_pattern should be RGGB, BGGR, GRBG, GBRG, please check it, now is {}'.format(self.bayer_pattern)
+        assert 0 < self.white_level < 65535, 'white_level should be greater than 0 and less than 65535, please check it, now is {}'.format(self.white_level)
 
 
     def run(self) -> np.ndarray:
@@ -124,7 +125,7 @@ if __name__ == '__main__':
     root_path = Path(os.path.abspath(__file__)).parent.parent
     img = np.fromfile(root_path / 'test_images' / 'HisiRAW_2592x1536_10bits_RGGB_Linear_20230116191336.raw', dtype=np.uint16)
     img = img.reshape(1536, 2592)
-    blc = BlackLevelCorrection(inputs=img, bayer_pattern='RGGB', black_level_r=64.0, black_level_gr=64.0, black_level_gb=64.0, black_level_b=64.0)
+    blc = BLC(inputs=img, bayer_pattern='RGGB', black_level_r=64.0, black_level_gr=64.0, black_level_gb=64.0, black_level_b=64.0)
     blc_output = blc.run()
     blc_output = showimg_with_uint8(blc_output)
     cv2.imwrite(root_path / 'demo_outputs' / 'blc.png', blc_output)

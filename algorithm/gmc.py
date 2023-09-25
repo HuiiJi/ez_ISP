@@ -39,6 +39,7 @@ class GMC:
         """
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3, 'inputs shape should be 3, please check it, now is {}'.format(len(self.inputs.shape))
+        assert 0 < self.gamma < 3, 'gamma should be greater than 0 and less than 10, please check it, now is {}'.format(self.gamma)
  
         
     def run(self) -> np.ndarray:

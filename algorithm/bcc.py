@@ -42,6 +42,8 @@ class BCC:
         """
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3 and self.inputs.shape[2] == 3, f'inputs shape should be 3, please check it, now is {len(self.inputs.shape)}'
+        assert 0 < self.bcc_contrast < 1, f'BCC_contrast should be greater than 0 and less than 1, please check it, now is {self.bcc_contrast}'
+        assert 0 < self.bcc_bright < 255, f'BCC_brightness should be greater than 0 and less than 255, please check it, now is {self.bcc_bright}'
       
       
     def run(self) -> np.ndarray:

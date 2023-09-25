@@ -32,10 +32,6 @@ class CCM:
                             [-0.298296, 1.614734, -0.316438], 
                             [0.023770, -0.538501, 1.514732 ]]
                             )
-        # self.ccm_matrix = self.kwargs.pop('ccm_matrix',
-        #                     [[ 1.9435506 , -0.7152609 , -0.2282897  ],
-        #                     [-0.22348748,  1.4704359 , -0.24694835   ],
-        #                     [ 0.03258422, -0.69400704,  1.6614228   ]])
         self.white_level = self.kwargs.pop('white_level', 1023)
         self.__check_inputs()
         
@@ -46,7 +42,8 @@ class CCM:
         """
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3, 'inputs shape should be 3, please check it, now is {}'.format(len(self.inputs.shape))
-        
+        assert 0 < self.white_level < 65535, 'white_level should be greater than 0 and less than 65535, please check it, now is {}'.format(self.white_level)
+
     
     def run(self) -> np.ndarray:
         return self.__color_correction()

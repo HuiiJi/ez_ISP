@@ -47,6 +47,7 @@ class GTM:
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 3 and self.inputs.shape[2] == 3, f'inputs shape should be 3, please check it, now is {len(self.inputs.shape)}'
         assert self.global_tone_mapping_dict in ['sigmoid', 'smoothstep', 'linear'], f'Invalid GTM method, please check it, now is {self.global_tone_mapping_dict}'
+        assert 0 < self.white_level < 65535, f'white_level should be greater than 0 and less than 65535, please check it, now is {self.white_level}'
         
         
     def run(self) -> np.ndarray:

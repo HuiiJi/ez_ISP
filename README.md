@@ -217,6 +217,7 @@ You can learn more about ISP Pipe from these courses., but i think these courses
 - [Recommend for ISP，推荐](https://www.eecs.yorku.ca/~mbrown/ICCV19_Tutorial_MSBrown.pdf)
 - [Digital Photomontage，了解](https://graphics.stanford.edu/talks/compphot-publictalk-may08.pdf)
 - [Marc大佬开课，强烈推荐](https://sites.google.com/site/marclevoylectures/schedule)
+- [CMU](http://graphics.cs.cmu.edu/courses/15-463/)
 
 ## Rerfence
 Here are some open source ISP projects, which are very helpful for me to complete this project.

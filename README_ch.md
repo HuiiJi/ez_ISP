@@ -194,7 +194,7 @@ Y2R: ~
 ```
 这个配置文件包含了所有的ISP模块，你可以根据你的需要来配置这些模块。
 
-The params are listed as follows.
+其中主要的参数如下所示。
 - `enable`: enable or disable the ISP module.
 - `RAW_img_path`: the path of the RAW image.
 - `RAW_Height`: the height of the RAW image.
@@ -217,10 +217,10 @@ The params are listed as follows.
 - [Camera History， 了解](http://www.cs.cornell.edu/courses/cs6640/2012fa/slides/01-History.pdf)
 - [Recommend for ISP，推荐](https://www.eecs.yorku.ca/~mbrown/ICCV19_Tutorial_MSBrown.pdf)
 - [Digital Photomontage，了解](https://graphics.stanford.edu/talks/compphot-publictalk-may08.pdf)
-- [Marc大佬开课，强烈推荐](https://sites.google.com/site/marclevoylectures/schedule)
-
+- [Marc大佬开课，推荐](https://sites.google.com/site/marclevoylectures/schedule)
+- [CMU的计算摄影课程，强烈推荐](http://graphics.cs.cmu.edu/courses/15-463/)
 ## 参考
-这里是一些开源的ISP项目，这些项目对我完成这个项目非常有帮助。
+这里是一些优秀开源的ISP项目，这些项目对我完成这个项目非常有帮助。
 ### Python
 
 - [openISP](https://github.com/cruxopen/openISP)
@@ -229,6 +229,7 @@ The params are listed as follows.
 
 - [HDR-ISP](https://github.com/JokerEyeAdas/HDR-ISP)
 - [ISPLab](https://github.com/yuqing-liu-dut/ISPLab)
+- [ISP-pipe-hdr](https://github.com/jhfmat/ISP-pipeline-hdrplus)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

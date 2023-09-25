@@ -18,7 +18,7 @@ enable:
   Y2R: True
 
 # -------------------- Algorithm Params --------------------
-RAW_img_path: 'C:\Users\75241\Downloads\ez_ISP-main\ez_ISP-main\test_images\2DNR_Case_1_1.raw' # RAW image path， please change to your own path
+RAW_img_path: '.\test_images\2DNR_Case_1_1.raw' # RAW image path， please change to your own path
 RAW_Height: 1080
 RAW_Width: 1920
 white_level: 1023
