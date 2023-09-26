@@ -23,7 +23,7 @@ class EE:
         2. edge enhancement
         
     usage:
-        ee = EE(inputs, edge_enhancement_strength=0.36, edge_enhancement_kernel_radius=21)
+        ee = EE(inputs, edge_enhancement_strength=0.36)
     """
     def __init__(self, inputs: np.ndarray = None, **kwargs: Dict[str, Any]) -> None:
         super().__init__()
