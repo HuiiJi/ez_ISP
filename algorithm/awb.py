@@ -30,9 +30,9 @@ class AWB:
         self.inputs = inputs
         self.kwargs = kwargs
         self.bayer_pattern = self.kwargs.get('bayer_pattern', 'RGGB')
-        self.r_gain = self.kwargs.pop('r_gain', 1.5)
-        self.b_gain = self.kwargs.pop('b_gain', 1.8)
-        self.white_level = self.kwargs.get('white_level', 1023)
+        self.r_gain = self.kwargs.get('r_gain', None)
+        self.b_gain = self.kwargs.get('b_gain', None)
+        self.white_level = self.kwargs.get('white_level', None)
         self.__check_inputs()
         
         
@@ -43,8 +43,6 @@ class AWB:
         assert self.inputs is not None, 'inputs is None, please check it'
         assert len(self.inputs.shape) == 2, 'inputs shape should be 2, please check it, now is {}'.format(len(self.inputs.shape))
         assert self.bayer_pattern in ['RGGB', 'BGGR', 'GRBG', 'GBRG'], 'bayer_pattern should be RGGB, BGGR, GRBG, GBRG, please check it, now is {}'.format(self.bayer_pattern)
-        assert self.r_gain > 1.0, 'r_gain should be greater than 0, please check it, now is {}'.format(self.r_gain)
-        assert self.b_gain > 1.0, 'g_gain should be greater than 0, please check it, now is {}'.format(self.b_gain)
 
 
     def run(self)-> np.ndarray:

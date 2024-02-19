@@ -11,8 +11,7 @@ import cv2
 from typing import Any, Dict, List, Optional, Tuple, Union
 from utils import time_cost_decorator
 import os
-
-
+import sys
 
 class FIR:
     """
@@ -44,7 +43,7 @@ class FIR:
         assert self.raw_img_path is not None, 'raw_img_path is None, please check it'
         if not isinstance(self.raw_img_path, str):
             raise TypeError(f'raw_img_path should be str, please check it, now is {type(self.raw_img_path)}')
-        if self.raw_img_path.split('.')[-1] not in ('dng', 'DNG', 'raw', 'RAW', 'nef', 'NEF', 'cr2', 'CR2', 'tif', 'TIFF'):
+        if self.raw_img_path.split('.')[-1] not in ('dng', 'DNG', 'raw', 'RAW', 'nef', 'NEF', 'cr2', 'CR2', 'tif', 'TIFF', 'png', 'PNG'):
             raise TypeError(f'RAW image should be dng, DNG, raw, RAW, nef, NEF, cr2, CR2, tif, TIFF, please check it, now is {self.raw_img_path.split(".")[-1]}')
         if not os.path.exists(self.raw_img_path):
             raise TypeError(f'RAW image path not exists, please check it, now is {self.raw_img_path}')
@@ -86,9 +85,7 @@ class FIR:
         """
         get the raw image without metadata, such as .raw, .RAW
         """
-        assert self.raw_height is not None, 'raw_height is None, please check it'
-        assert self.raw_width is not None, 'raw_width is None, please check it'
-        raw_img = np.fromfile(self.raw_img_path, dtype=np.uint16).reshape((self.raw_height, self.raw_width))
+        raw_img = np.fromfile(self.raw_img_path, dtype=np.uint16).reshape((self.raw_height, self.raw_width)) if self.raw_height is not None else cv2.imread(self.raw_img_path, cv2.IMREAD_UNCHANGED)
         return raw_img
 
 

@@ -30,7 +30,7 @@ class AAF:
         super().__init__()
         self.inputs = inputs    
         self.kwargs = kwargs
-        self.white_level = self.kwargs.get('white_level', 1023)
+        self.white_level = self.kwargs.get('white_level', None)
         self.__check_inputs()
     
     

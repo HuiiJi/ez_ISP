@@ -15,7 +15,7 @@ class CNR:
     Chroma Noise Reduction
     
     description:
-        this is a class for Chroma Noise Reduction, the method is mean or median, default is mean
+        this is a class for Chroma Noise Reduction, the method is mean or median or gaussian
     
     step:
         1. get the chroma channel
@@ -100,11 +100,18 @@ class CNR:
     
     def __get_gaussian_kernel(self, radius:Union[np.ndarray, int]=1, sigma:Union[np.ndarray, int]=20) -> np.ndarray:
         """
-        get the gaussian kernel
+        Returns a 2D Gaussian kernel of size (2*radius+1, 2*radius+1) with standard deviation sigma.
+        
+        Args:
+        - radius: an odd integer or a 1D numpy array of odd integers representing the radius of the kernel.
+        - sigma: a positive integer or a 1D numpy array of positive integers representing the standard deviation of the kernel.
+        
+        Returns:
+        - gaussian_kernel: a 2D numpy array representing the Gaussian kernel.
         """
         assert radius%2 == 1, f'radius must be a odd number, please check your input radius: {radius}'
         assert sigma > 0, f'sigma must be a positive number, please check your input sigma: {sigma}'
-        
+
         gaussian_kernel = np.zeros((2*radius+1, 2*radius+1), dtype=np.float32)
         for y in range(-radius, radius+1):
             for x in range(-radius, radius+1):

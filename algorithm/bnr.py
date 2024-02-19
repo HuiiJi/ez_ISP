@@ -8,6 +8,7 @@
 import numpy as np
 from typing import Any, Dict, List, Optional, Tuple, Union
 from utils import time_cost_decorator, showimg_with_uint8
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
 
 class BNR:
@@ -242,15 +243,21 @@ class BNR:
         self.inputs = self.inputs.astype(np.float32)
         bilateral_output = self.inputs.copy()
         self.inputs = self.__padding_inputs(self.inputs, padding)
+
+        gaussian_weights = np.zeros((2*radius+1, 2*radius+1), dtype=np.float32)
+        for y in range(-radius, radius+1):
+            for x in range(-radius, radius+1):
+                gaussian_weights[y+radius, x+radius] = -(y**2 + x**2)/(2*sigma_s**2)
+
        
         for i in range(padding, H+padding):
             for j in range(padding, W+padding):
                 weights_sum = 0
                 pixel_sum = 0
                 for y in range(-radius, radius+1):
-                    for x in range(-radius, radius+1):
-                        spital_weights = -(y**2 + x**2)/(2*sigma_s**2)
-                        pixel_weights = -(self.inputs[i,j] - self.inputs[i+y, j+x])**2/(2*sigma_p**2)
+                    for x in range(-radius, radius+1):   
+                        spital_weights = gaussian_weights[y+radius, x+radius]
+                        pixel_weights = -(self.mse_table[int(self.inputs[i,j]), int(self.inputs[i+y, j+x])])
                         weights = np.exp(spital_weights + pixel_weights)
                         weights_sum += weights
                         pixel_sum += weights * self.inputs[i+y, j+x]     
@@ -287,26 +294,24 @@ class BNR:
                 w_max = 0
                 pixel_sum = 0
                 weights_sum = 0
+                center_block = self.inputs[i - block_window_radius: i + block_window_radius + 1, j - block_window_radius: j +  block_window_radius + 1]
                 for y in range(2 * search_window_radius + 1 - 2 * block_window_radius - 1):
                     for x in range(2 * search_window_radius + 1 - 2 * block_window_radius - 1):
                         if  y != i or x != j:
                             neighbor_center_y = i - search_window_radius + block_window_radius + y
                             neighbor_center_x = j - search_window_radius + block_window_radius + x
-                            center_block = self.inputs[i - block_window_radius: i + block_window_radius + 1, j - block_window_radius: j +  block_window_radius + 1]
                             neighbor_block = self.inputs[neighbor_center_y - block_window_radius: neighbor_center_y + block_window_radius + 1, neighbor_center_x - block_window_radius: neighbor_center_x + block_window_radius + 1]
-                            mse_dist = ((neighbor_block - center_block) ** 2) / ((2 * block_window_radius + 1) ** 2)
-                            w = np.exp(-np.sum(mse_dist) / (h ** 2))
-                            if w > w_max:
-                                w_max = w
+                            mse_dist = np.sum((neighbor_block - center_block) ** 2) / ((2 * block_window_radius + 1) ** 2)
+                            # mse_dist = self.__get_block_mse(center_block, neighbor_block)
+                            # w = np.exp(-np.sum(mse_dist) / (h ** 2))
+                            w = np.exp(-mse_dist / h ** 2)
                             weights_sum += w
                             pixel_sum += w * self.inputs[neighbor_center_y, neighbor_center_x]
-                weights = weights_sum + w_max
-                pixel = pixel_sum + w_max * self.inputs[i, j]
-                nlm_output[i - padding, j - padding] = pixel / weights
+                nlm_output[i - padding, j - padding] = pixel_sum / weights_sum
         return np.clip(nlm_output, 0, self.white_level).astype(np.uint16)
     
     
-    def __get_mse_table(self)->np.ndarray:
+    def __get_mse_table(self, sigma_p:Union[np.ndarray, int]=15)->np.ndarray:
         """
         this function is used to get the mse table
         
@@ -314,11 +319,25 @@ class BNR:
             mse_table: the mse table
         """
         mse_table = np.zeros((self.white_level+1, self.white_level+1), dtype=np.float32)
-        for i in range(0, self.white_level):
-            for j in range(0, self.white_level):
-                mse_table[i, j] = (i - j) ** 2
+        for i in range(0, self.white_level+1):
+            for j in range(i, self.white_level+1):
+                mse_table[i, j] = mse_table[j, i] = ((i - j) ** 2) / (2* sigma_p ** 2)
         return mse_table
-                            
+    
+    
+    def __get_block_mse(self, block_a:np.ndarray, block_b:np.ndarray)->np.ndarray:
+ 
+        """
+        this function is used to get the mse of two blocks
+        """
+        assert block_a.shape == block_b.shape, f'block_a and block_b must have the same shape, please check it, now is block_a.shape: {block_a.shape}, block_b.shape: {block_b.shape}'
+
+        pixel_total = block_a.shape[0] * block_a.shape[1]
+        mse_dist = self.mse_table[block_a, block_b]
+        mse_dist = np.sum(mse_dist) / pixel_total
+        return mse_dist
+
+                                        
                         
 if __name__ == '__main__':
     import cv2
@@ -327,8 +346,7 @@ if __name__ == '__main__':
    
     root_path = Path(os.path.abspath(__file__)).parent.parent
     img = cv2.imread(root_path / 'test_images' / 'pose2-noisy.png', 0)
-    # img = img.reshape(1536, 2592)
-    noise_reduce = BNR(inputs=img, BNR_method='nlm')
+    noise_reduce = BNR(inputs=img, BNR_method='bilateral')
     nr_output = noise_reduce.run()
     nr_output = showimg_with_uint8(nr_output)
     cv2.imwrite(root_path / 'demo_outputs' / 'bnr.png', nr_output)

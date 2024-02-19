@@ -27,12 +27,12 @@ class BLC:
         super().__init__()
         self.inputs = inputs
         self.kwargs = kwargs
-        self.bayer_pattern = self.kwargs.get('bayer_pattern', 'RGGB')
-        self.white_level = self.kwargs.get('white_level', 1023)
-        self.black_level_r = self.kwargs.get('black_level_r', 256.0)
-        self.black_level_gr =  self.kwargs.pop('black_level_gr', 256.0)
-        self.black_level_gb = self.kwargs.pop('black_level_gb', 256.0)
-        self.black_level_b = self.kwargs.pop('black_level_b', 256.0)
+        self.bayer_pattern = self.kwargs.get('bayer_pattern', None)
+        self.white_level = self.kwargs.get('white_level', None)
+        self.black_level_r = self.kwargs.get('black_level_r', None)
+        self.black_level_gr =  self.kwargs.pop('black_level_gr', None)
+        self.black_level_gb = self.kwargs.pop('black_level_gb', None)
+        self.black_level_b = self.kwargs.pop('black_level_b', None)
         self.__check_inputs()
         
         

@@ -29,8 +29,8 @@ class GTM:
         super().__init__()
         self.inputs = inputs
         self.kwargs = kwargs
-        self.white_level = self.kwargs.get('white_level', 1023)
-        self.black_level = self.kwargs.get('black_level_r', 64.0)
+        self.white_level = self.kwargs.get('white_level', None)
+        self.black_level = self.kwargs.get('black_level_r', None)
         self.global_tone_mapping_dict = self.kwargs.get('GTM_method', 'smoothstep')
         self.__check_inputs()
         _dict_ = {
@@ -69,13 +69,6 @@ class GTM:
         Get Smoothstep LUT 
         """
         curve = lambda x: 3 * x ** 2 - 2 * x ** 3
-        # curve = lambda x: 1.0 - (1.0 - x) ** 3
-        # import  matplotlib.pyplot as plt
-        # x = np.linspace(0, 1, self.white_level + 1)
-        # y = curve(x)
-        # plt.plot(x, y)
-        # plt.plot(x, x)
-        # plt.savefig('/mnt/cvisp/isp/ez_ISP/demo_outputs/smoothstep.png')
         lut = np.zeros(self.white_level + 1, dtype=np.uint8)
         for i in range(0, self.white_level + 1):
             lut[i] = np.clip(curve(float(i) / self.white_level) * 255, 0, 255)

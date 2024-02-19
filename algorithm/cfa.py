@@ -8,7 +8,7 @@
 import numpy as np
 from typing import Any, Dict, List, Optional, Tuple, Union
 from utils import time_cost_decorator, showimg_with_uint8
-
+import cv2
 
 class CFA:
     """
@@ -31,7 +31,7 @@ class CFA:
         self.kwargs = kwargs
         self.bayer_pattern = self.kwargs.get('bayer_pattern', 'RGGB')
         self.white_level = self.kwargs.get('white_level', 1023)
-        self.cfa_method = self.kwargs.get('CFA_method', 'bilinear')
+        self.cfa_method = self.kwargs.get('CFA_method', 'opencv')
         self.__check_inputs()
         
         
@@ -40,7 +40,6 @@ class CFA:
         check the inputs
         """
         assert self.bayer_pattern in ['RGGB', 'BGGR', 'GRBG', 'GBRG'], 'bayer_pattern should be RGGB, BGGR, GRBG, GBRG, please check it, now is {}'.format(self.bayer_pattern)
-        assert self.cfa_method in ['malvar', 'bilinear'], "type should be in ['malvar', 'bilinear'], but got {}".format(self.cfa_method)
         assert self.inputs is not None, "inputs is None, please check it"
         assert self.inputs.ndim == 2 and len(self.inputs.shape) == 2, "inputs shape is {}, should be 2 dims cause color filter array".format(self.inputs.shape)
         
@@ -64,9 +63,26 @@ class CFA:
         __dict__ = {
             'malvar': self.__malvar_demosaic,
             'bilinear': self.__bilinear_demosaic,
+            'opencv': self.__opencv_demosaic,
         }
         return __dict__.pop(self.cfa_method)()
     
+
+    @time_cost_decorator
+    def __opencv_demosaic(self) -> np.ndarray:
+        """
+        use opencv demosaic alogrithm
+        """
+        if self.bayer_pattern == 'RGGB':
+            demosaic_output = cv2.cvtColor(self.inputs, cv2.COLOR_BayerRGGB2RGB)
+        elif self.bayer_pattern == 'BGGR': 
+            demosaic_output = cv2.cvtColor(self.inputs, cv2.COLOR_BayerBGGR2RGB)
+        elif self.bayer_pattern == 'GRBG':
+            demosaic_output = cv2.cvtColor(self.inputs, cv2.COLOR_BAYER_GRBG2RGB)
+        elif self.bayer_pattern == 'GBRG':
+            demosaic_output = cv2.cvtColor(self.inputs, cv2.COLOR_BAYER_GBRG2RGB)
+        return np.clip(demosaic_output, 0, self.white_level).astype(np.uint16)
+
     
     @time_cost_decorator
     def __malvar_demosaic(self) -> np.ndarray:

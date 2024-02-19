@@ -13,6 +13,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__) + '/algorithm')
 sys.path.insert(0, os.path.dirname(__file__) + '/config')
 sys.path.insert(0, os.path.dirname(__file__) + '/assets')
+sys.path.insert(0, os.path.dirname(__file__) + '/test_images')
 sys.path.insert(0, os.path.dirname(__file__))
 
 
