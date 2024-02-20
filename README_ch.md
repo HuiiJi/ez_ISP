@@ -91,9 +91,6 @@ ez_ISP
 你可以通过pip安装下面的包来安装ez_ISP。
 - The main package is `numpy`, and `opencv-python` is used for image I/O. 
 - Other packages are used for the demo such as `rawpy` and `yaml`, `time`, `os`.
-```bash
-pip install yaml, numpy, opencv-python, time, rawpy, os, path
-```
 然后git clone ez_ISP项目，你就可以运行项目了。
 ```bash
 git clone https://github.com/HuiiJi/ez_ISP.git
