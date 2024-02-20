@@ -94,9 +94,6 @@ Time cost: 27.12 s for a 1920x1080 image, though it is not fast enough, it is ea
 You can install ez_ISP by pip install the packages below.
 - The main package is `numpy`, and `opencv-python` is used for image I/O. 
 - Other packages are used for the demo such as `rawpy` and `yaml`, `time`, `os`.
-```bash
-pip install yaml, numpy, opencv-python, time, rawpy, os
-```
 Clone the ez_ISP project from github, and you can run the project.
 ```bash
 git clone https://github.com/HuiiJi/ez_ISP.git
