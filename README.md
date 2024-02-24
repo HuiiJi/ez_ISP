@@ -204,17 +204,18 @@ If you don't want to use the ISP module, just set the `enable` to `False`. What 
 ## Course
 Here are some courses about ISP, you can learn more about ISP from these courses.
 ### camera related
-- [ISP Pipe1， 了解](https://web.stanford.edu/class/cs231m/lectures/lecture-11-camera-isp.pdf)
-- [ISP Pipe2， 了解](http://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/lectures/16_camerapipeline1.pdf)
-- [ISP Pipe3， 了解](http://graphics.cs.cmu.edu/courses/15-463/2017_fall/lectures/lecture2.pdf)
+- [ISP Pipe1](https://web.stanford.edu/class/cs231m/lectures/lecture-11-camera-isp.pdf)
+- [ISP Pipe2](http://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/lectures/16_camerapipeline1.pdf)
+- [ISP Pipe3](http://graphics.cs.cmu.edu/courses/15-463/2017_fall/lectures/lecture2.pdf)
 
 You can learn more about ISP Pipe from these courses., but i think these courses are not useful for me, because i am not a camera engineer, i just want to learn the ISP algorithm, so i think the courses below are more useful for me.
 ### Computational photography
+- [CMU，必读](http://graphics.cs.cmu.edu/courses/15-463/)
 - [Camera History， 了解](http://www.cs.cornell.edu/courses/cs6640/2012fa/slides/01-History.pdf)
 - [Recommend for ISP，推荐](https://www.eecs.yorku.ca/~mbrown/ICCV19_Tutorial_MSBrown.pdf)
 - [Digital Photomontage，了解](https://graphics.stanford.edu/talks/compphot-publictalk-may08.pdf)
-- [Marc大佬开课，强烈推荐](https://sites.google.com/site/marclevoylectures/schedule)
-- [CMU](http://graphics.cs.cmu.edu/courses/15-463/)
+- [Marc大佬开课，推荐](https://sites.google.com/site/marclevoylectures/schedule)
+
 
 ## Rerfence
 Here are some open source ISP projects, which are very helpful for me to complete this project.
